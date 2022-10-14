@@ -29,10 +29,9 @@
           "commands": ["cd vue-host", "yarn start"]
         },
         {
-          "commands": ["cd angular-host", "ng serve"]
+          "commands": []
         },
       ]
     }
   ],
-  "workbench.editor.showTabs": false
 }
