@@ -1,0 +1,38 @@
+{
+  "restoreTerminals.runOnStartup" : false,
+  "restoreTerminals.terminals": [
+    {
+      "splitTerminals": [
+        {
+          "commands": ["cd react-app", "yarn start"]
+        },
+        {
+          "commands": ["cd vanilla-app", "yarn start"]
+        },
+        {
+          "commands": ["cd vue-app", "yarn start"]
+        },
+        {
+          "commands": ["cd angular-app", "npm run wc"]
+        }
+      ]
+    },
+    {
+      "splitTerminals": [
+        {
+          "commands": ["cd god-host", "yarn start"]
+        },
+        {
+          "commands": ["cd react-host", "yarn start"]
+        },
+        {
+          "commands": ["cd vue-host", "yarn start"]
+        },
+        {
+          "commands": ["cd angular-host", "ng serve"]
+        },
+      ]
+    }
+  ],
+  "workbench.editor.showTabs": false
+}

@@ -1,0 +1,54 @@
+{
+  "name": "angular-10-webcomponents-demo",
+  "version": "0.0.0",
+  "scripts": {
+    "wc": "run-p --print-label wc:build wc:start",
+    "wc:watch": "npm-watch wc:concat",
+    "wc:start": "cd ./elements/angularApp/ && npm run start",
+    "wc:build": "ng build --configuration production --output-hashing none && node concatenate.js",
+    "wc:concat":"node concatenate.js",
+    "wc:serve": "ng build --configuration production --output-hashing none && node concatenate.js && npx serve ./elements/ ",
+    "build": "rimraf dist/angular-10-webcomponents-demo && ng build --configuration production --output-hashing none",
+    "ng": "ng",
+    "start": "ng serve",
+    "watch": "ng build --watch --configuration production --output-hashing none",
+    "test": "ng test"
+  },
+  "watch": {
+    "patterns": ["./dist/angular-10-webcomponents-demo/", "test"],
+    "extensions": "js",
+    "legacyWatch": true,
+    "runOnChangeOnly": false
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^14.2.0",
+    "@angular/common": "^14.2.0",
+    "@angular/compiler": "^14.2.0",
+    "@angular/core": "^14.2.0",
+    "@angular/elements": "^14.2.4",
+    "@angular/forms": "^14.2.0",
+    "@angular/platform-browser": "^14.2.0",
+    "@angular/platform-browser-dynamic": "^14.2.0",
+    "@angular/router": "^14.2.0",
+    "concat": "^1.0.3",
+    "npm-watch": "^0.11.0",
+    "rxjs": "~7.5.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.11.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^14.2.4",
+    "@angular/cli": "~14.2.4",
+    "@angular/compiler-cli": "^14.2.0",
+    "@types/jasmine": "~4.0.0",
+    "jasmine-core": "~4.3.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.0.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "~4.7.2"
+  }
+}
