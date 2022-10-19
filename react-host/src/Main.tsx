@@ -16,7 +16,6 @@ export default function Main() {
         <lit-button />
         <button>hello</button>
       </div>
-      <div></div>
       <Suspense fallback={<div>Loading ReactAppContent...</div>}>
         <ErrorBoundary>
           <ReactAppContent />
