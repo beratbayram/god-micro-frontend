@@ -4,6 +4,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import Main from "./Main";
 
-export default function MainRenderer(root: HTMLElement) {
-  ReactDOM.render(<Main />, root);
+interface Props {
+  msg: string;
+}
+
+export default function MainRenderer(root: HTMLElement,props: Props) {
+  ReactDOM.render(<Main {...props}/>, root);
 }

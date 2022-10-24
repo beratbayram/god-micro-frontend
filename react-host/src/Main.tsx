@@ -7,7 +7,11 @@ const VueAppContentWrapper = lazy(() => import("./VueAppContentWrapper"));
 const VanillaAppContentWrapper = lazy(() => import("./VanillaAppWrapper"));
 const AngularWcWrapper = lazy(() => import("./AngularWcWrapper"));
 
-export default function Main() {
+interface Props {
+  msg: string;
+}
+
+export default function Main({ msg }: Props) {
   return (
     <>
       <div>
@@ -15,25 +19,26 @@ export default function Main() {
         <p>(:3000)</p>
         <lit-button />
         <button>hello</button>
+        <input disabled value={msg}/>
       </div>
       <Suspense fallback={<div>Loading ReactAppContent...</div>}>
         <ErrorBoundary>
-          <ReactAppContent />
+          <ReactAppContent msg={msg} />
         </ErrorBoundary>
       </Suspense>
       <Suspense fallback={<div>Loading VueAppContentWrapper...</div>}>
         <ErrorBoundary>
-          <VueAppContentWrapper />
+          <VueAppContentWrapper msg={msg}/>
         </ErrorBoundary>
       </Suspense>
       <Suspense fallback={<div>Loading VanillaAppContentWrapper...</div>}>
         <ErrorBoundary>
-          <VanillaAppContentWrapper />
+          <VanillaAppContentWrapper msg={msg}/>
         </ErrorBoundary>
       </Suspense>
       <Suspense fallback={<div>Loading VanillaAppContentWrapper...</div>}>
         <ErrorBoundary>
-          <AngularWcWrapper />
+          <AngularWcWrapper msg={msg}/>
         </ErrorBoundary>
       </Suspense>
     </>

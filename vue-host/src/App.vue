@@ -2,22 +2,20 @@
 import "./index.css";
 import { defineComponent } from "vue";
 import { Content } from "vueApp/ContentRenderer";
-import ContentRenderer from "reactApp/ContentRenderer";
+import ReactWrapper from "./ReactWrapper.vue";
+import VanillaWrapper from "./VanillaWrapper.vue";
 import "reactApp/ContentWc";
-import VanillaAppRenderer from "vanillaApp/AppRenderer";
 import "angularApp/Component";
 
-export default /*#__PURE__*/ defineComponent({
-  components: { Content },
-  mounted() {
-    const { reactRef, vanillaRef } = this.$refs;
-    ContentRenderer(reactRef);
-    VanillaAppRenderer(vanillaRef);
+export default defineComponent({
+  components: { Content, ReactWrapper, VanillaWrapper },
+  props: {
+    msg: String,
   },
   methods: {
     greet() {
       window.alert("hey");
-    },
+    }
   },
 });
 </script>
@@ -28,10 +26,11 @@ export default /*#__PURE__*/ defineComponent({
     <p>(:3005)</p>
     <lit-button></lit-button>
     <button>hello</button>
+    <input disabled :value="msg" />
   </div>
-  <div @click="greet" ref="reactRef"></div>
-  <content-wc name="React WC" @click="greet" />
-  <Content @click="greet"></Content>
-  <div @click="greet" ref="vanillaRef"></div>
-  <angular-component @click="greet" />
+  <content-wc name="React WC" :msg="msg" />
+  <ReactWrapper :msg="msg"/>
+  <Content @click="greet" :msg="msg"/>
+  <VanillaWrapper :msg="msg"/>
+  <angular-component :msg="msg" />
 </template>

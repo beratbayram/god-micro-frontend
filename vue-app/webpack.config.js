@@ -22,6 +22,11 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: "vue-loader",
+        options: {
+          compilerOptions: {
+            isCustomElement: tag => tag.includes("-")
+          }
+        }
       },
       {
         test: /\.tsx?$/,

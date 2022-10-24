@@ -7,5 +7,15 @@ h1 {
 }
 
 button {
-  border: 10px solid pink;
+  border: 2px dashed deeppink;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+details {
+  margin: 17px;
 }

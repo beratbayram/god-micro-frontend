@@ -2,8 +2,16 @@ import { createApp } from "vue";
 
 import App from "./App.vue";
 
-function AppRenderer(elem: string | Element){
-  createApp(App).mount(elem);
+interface Props {
+  [msg: string]: string;
+}
+
+let app: typeof App | null = null;
+
+function AppRenderer(elem: string | Element,props: Props){
+  if (app) app.unmount()
+  app = createApp(App, props)
+  app.mount(elem);
 }
 
 export {App, AppRenderer};

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import VanillaAppRenderer from "vanillaApp/AppRenderer";
 
 
-export default function VanillaAppContentWrapper() {
+export default function VanillaAppContentWrapper(props) {
 
   const ref = useRef(null);
 
@@ -10,9 +10,9 @@ export default function VanillaAppContentWrapper() {
 
   useEffect(() => {
     if (ref.current) {
-      VanillaAppRenderer(ref.current);
+      VanillaAppRenderer(ref.current,props);
     }
-  }, []);
+  }, [props.msg]);
 
   return <div ref={ref}/>;
 }

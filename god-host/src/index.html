@@ -11,38 +11,48 @@
   <h1>
     God Host
   </h1>
-  <table>
-    <tr>
-      <td>color</td>
-      <td>
-        <input type="color" onchange="setCssVariable('--lit-button-text-color', this.value);" />
-      </td>
-    </tr>
-    <tr>
-      <td>Normal WC</td>
-      <td>
-        <lit-button />
-      </td>
-    </tr>
-    <tr>
-      <td>Non-Shadow WC</td>
-      <td>
-        <lit-button-light />
-      </td>
-    </tr>
-    <tr>
-      <td>Normal</td>
-      <td><button>hello</button></td>
-    </tr>
-  </table>
+  <div class="flex">
+    <input type="text" placeholder="Type Something..." id="main-input" oninput="handleMainInputChange(this.value)" />
+  </div>
   <div id="reactHost">
     Loading React Host...
   </div>
   <div id="vueHost">
     Loading Vue Host...
   </div>
-  <angular-component>Loading Angular WC ...</angular-component>
+  <angular-component id="root-angular-wc" msg="hey">
+    Loading Angular WC...
+  </angular-component>
   <div id="angularHost"></div>
+  <details>
+    <summary>Shadow DOM Examples</summary>
+    <table>
+      <tr>
+        <td>color</td>
+        <td>
+          <input type="color" onchange="setCssVariable('--lit-button-text-color', this.value);" />
+        </td>
+      </tr>
+      <tr>
+        <td>Normal WC</td>
+        <td>
+          <lit-button />
+        </td>
+      </tr>
+      <tr>
+        <td>Non-Shadow WC</td>
+        <td>
+          <lit-button-light />
+        </td>
+      </tr>
+      <tr>
+        <td>Normal</td>
+        <td>
+          <button>hello</button>
+        </td>
+      </tr>
+    </table>
+  </details>
 </body>
 
 </html>
