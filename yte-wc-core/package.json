@@ -20,9 +20,9 @@
     "test": "tsc && wtr --coverage",
     "test:watch": "tsc && concurrently -k -r \"yarn tsc\" \"wtr --watch\"",
 
-    "storybook": "yarn build && concurrently -k -r \"yarn tsc\" \"wds -c .storybook/server.mjs\"",
-    "storybook:build": "yarn build && build-storybook",
-    "storybook:serve": "yarn storybook:build && npx serve storybook-static"
+    "sb": "yarn build && concurrently -k -r \"yarn tsc\" \"wds -c .storybook/server.mjs\"",
+    "sb:build": "yarn build && build-storybook",
+    "sb:serve": "yarn sb:build && npx serve storybook-static"
   },
   "dependencies": {
     "lit": "^2.0.2"
@@ -61,7 +61,9 @@
         "error"
       ],
       "import/no-unresolved": "off",
-      "import/extensions": "off"
+      "import/extensions": "off",
+      "no-shadow": "off",
+      "@typescript-eslint/no-shadow": "error"
     }
   },
   "prettier": {
