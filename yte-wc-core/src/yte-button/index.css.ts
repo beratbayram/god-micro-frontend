@@ -117,4 +117,13 @@ export default css`
     height: 48px;
     padding: 24px 30px;
   }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    overflow: hidden;
+  }
 ` as CSSResultGroup;

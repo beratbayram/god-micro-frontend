@@ -1,9 +1,10 @@
-import { html, nothing, TemplateResult } from 'lit';
-import "./index";
+import { html, nothing } from 'lit';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import './index';
 import { Story, StorybookDefaultExport } from '../desc';
 
 interface Args {
-  slot?: TemplateResult | string;
+  slot?: string | typeof nothing;
   disabled?: boolean;
   variant?: string;
   shape?: string;
@@ -14,20 +15,20 @@ export default {
   title: 'yte-button',
   args: {
     disabled: false,
-    slot: '',
-    variant: "primary",
-    shape: 'sharp',
+    slot: nothing,
+    variant: 'primary',
+    shape: 'smooth',
     size: 'medium',
   },
   argTypes: {
     disabled: { control: 'boolean' },
     slot: { control: 'text' },
     variant: {
-      control: 'select',
+      control: 'radio',
       options: ['primary', 'secondary', 'tertiary'],
     },
-    shape: { control: 'select', options: ['sharp', 'smooth', 'rounded'] },
-    size: { control: 'select', options: ['small', 'medium', 'large'] },
+    shape: { control: 'radio', options: ['sharp', 'smooth', 'rounded'] },
+    size: { control: 'radio', options: ['small', 'medium', 'large'] },
   },
 } as StorybookDefaultExport<Args>;
 
@@ -43,7 +44,7 @@ const Template: Story<Args> = ({
     shape=${shape ?? nothing}
     size=${size ?? nothing}
     ?disabled=${disabled}
-    >${slot ?? nothing}</yte-button
+    >${unsafeHTML(slot ?? nothing)}</yte-button
   >`;
 
 export const Primary = Template.bind({});
@@ -51,11 +52,17 @@ export const Primary = Template.bind({});
 export const Secondary = Template.bind({});
 Secondary.args = {
   ...Primary.args,
-  variant: "secondary",
+  variant: 'secondary',
 };
 
 export const Tertiary = Template.bind({});
 Tertiary.args = {
   ...Primary.args,
-  variant: "tertiary",
+  variant: 'tertiary',
+};
+
+export const Slotted = Template.bind({});
+Slotted.args = {
+  ...Primary.args,
+  slot: `<img height="20" src="/assets/wc-icon.svg" alt="wc-icon" slot="icon"/>`,
 };

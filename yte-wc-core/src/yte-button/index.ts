@@ -4,7 +4,7 @@ import style from './index.css';
 import { Shape, Size, Variant } from './enums';
 
 @customElement('yte-button')
-export default class extends LitElement {
+export default class YteButton extends LitElement {
   static styles: CSSResultGroup = [style];
 
   @property({ type: Boolean }) disabled = false;
@@ -15,11 +15,17 @@ export default class extends LitElement {
 
   @property({ type: String }) size: Size = Size.medium;
 
+  @property({ type: Number }) counter = 0;
+
+  increment() {
+    this.counter += 1;
+  }
+
   render() {
     return html`
-      <button ?disabled=${this.disabled}>
+      <button ?disabled=${this.disabled} @click=${this.increment}>
         <div>
-          <slot>BUTTON</slot>
+          <slot>BUTTON: ${this.counter}</slot>
           <slot name="icon"></slot>
         </div>
       </button>
