@@ -1,16 +1,32 @@
 import { css, CSSResultGroup } from 'lit';
+import v from '../../utils/v';
 
 export default css`
+
   :host {
     display: block;
     box-sizing: border-box;
+
+    --yte--button-color: white;
+    --yte--button-background-color: #e60208;
+    --yte--button-background-color--hover: #dc050c;
+
+    --yte--button-color--active: rgba(255, 255, 255, 0.7);
+    --yte--button-background-color--active: #f2272d;
+
+    
   }
 
   @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
   button {
-    color: var(--yte-button-text-color, white);
-    background-color: var(--yte-button-background-color, #e60208);
+    color: ${v('', 'primary-text-color', 'button-color', '-button-color')};
+    background-color: ${v(
+      '',
+      'primary-color',
+      'button-background-color',
+      '-button-background-color'
+    )};
 
     border: none;
     display: flex;
@@ -31,12 +47,27 @@ export default css`
   }
 
   button:hover {
-    background-color: var(--yte-button-hover-background-color, #dc050c);
+    background-color: ${v(
+      '--hover',
+      'primary-color',
+      'button-background-color',
+      '-button-background-color'
+    )};
   }
 
   button:active {
-    background-color: var(--yte-button-active-background-color, #f2272d);
-    color: var(--yte-button-active-color, rgba(255, 255, 255, 0.7));
+    background-color: ${v(
+      '--active',
+      'primary-color',
+      'button-background-color',
+      '-button-background-color',
+    )};
+    color: ${v(
+      '--active',
+      'primary-text-color',
+      'button-color',
+      '-button-color'
+    )};
   }
 
   button:disabled:disabled:disabled {
