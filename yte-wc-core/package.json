@@ -11,7 +11,7 @@
     "./yte-button.js": "./dist/src/yte-button.js"
   },
   "scripts": {
-    "start": "tsc && concurrently -k -r \"yarn tsc\" \"wds\"",
+    "start": "tsc && concurrently -k -r \"yarn tsc\" \"yarn sass:watch\" \"wds\"",
     "build": "rimraf dist && tsc && yarn sass && yarn cem",
     "tsc": "tsc --watch --preserveWatchOutput",
     "cem": "cem analyze --litelement --exclude dist",
