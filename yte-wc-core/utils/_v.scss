@@ -1,0 +1,20 @@
+@use "sass:list";
+
+@function _v($variables,$index,$postfix: '') {
+  @if ($index > (list.length($variables))){
+    @return var(--yte-custom-variables-error,deeppink);
+  }
+
+  $value: list.nth($variables,$index);
+
+  @if $value == null {
+    @error "Invalid value";
+  }
+
+  @return var(--yte-#{$value}#{$postfix},#{_v($variables,$index + 1,$postfix)});
+}
+
+@function v($postfix,$variables...) {
+
+  @return _v($variables,1,$postfix);
+}

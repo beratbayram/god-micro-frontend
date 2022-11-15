@@ -12,20 +12,25 @@
   },
   "scripts": {
     "start": "tsc && concurrently -k -r \"yarn tsc\" \"wds\"",
-    "build": "rimraf dist && tsc && yarn cem",
+    "build": "rimraf dist && tsc && yarn sass && yarn cem",
     "tsc": "tsc --watch --preserveWatchOutput",
     "cem": "cem analyze --litelement --exclude dist",
-    "lint": "eslint --ext .ts,.html . --ignore-path .gitignore && prettier \"**/*.ts\" --check --ignore-path .gitignore",
 
     "test": "tsc && wtr --coverage",
     "test:watch": "tsc && concurrently -k -r \"yarn tsc\" \"wtr --watch\"",
 
-    "sb": "yarn build && concurrently -k -r \"yarn tsc\" \"wds -c .storybook/server.mjs\"",
-    "sb:build": "yarn build && build-storybook",
-    "sb:serve": "yarn sb:build && npx serve storybook-static"
+    "sass": "node sass2lit.js",
+    "sass:watch": "node sass2lit.js --watch",
+
+    "sb": "yarn build && concurrently -k -r \"yarn tsc\" \"yarn sass:watch\" \"yarn sb:wds\"",
+    "sb:build": "yarn build && build-storybook --disable-telemetry --output-dir ./dist/storybook",
+    "sb:serve": "yarn sb:build && npx serve storybook-static",
+    "sb:wds": "wds -c .storybook/server.mjs"
   },
   "dependencies": {
-    "lit": "^2.0.2"
+    "chokidar": "^3.5.3",
+    "lit": "^2.0.2",
+    "sass": "^1.56.1"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.4.17",
