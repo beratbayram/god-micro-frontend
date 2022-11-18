@@ -6,7 +6,7 @@ import "./index.css";
 export default function Content({name,msg}) {
   return (
     <div className="react-container">
-      <div>{name ?? "React"} (:3001)</div>
+      <div>React2 (:3001)</div>
       <input type="text" disabled value={msg}/>
       <lit-button />
     </div>

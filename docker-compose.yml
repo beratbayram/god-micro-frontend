@@ -1,0 +1,45 @@
+version: '1.0'
+services:
+  god-host:
+    build:
+      context: god-host
+      dockerfile: ./Dockerfile
+    ports:
+      - "4000:4000"
+    links:
+      - react-app
+      - react-host
+      - vanilla-app
+      - vue-app
+      - vue-host
+  react-host:
+    build:
+      context: react-host
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"  
+  react-app:
+    build:
+      context: react-app
+      dockerfile: ./Dockerfile
+    ports:
+      - "3001:3001"        
+  vanilla-app:
+    build:
+      context: vanilla-app
+      dockerfile: ./Dockerfile
+    ports:
+      - "3002:3002" 
+  vue-app:
+    build:
+      context: vue-app
+      dockerfile: ./Dockerfile
+    ports:
+      - "3003:3003"     
+  vue-host:
+    build:
+      context: vue-host
+      dockerfile: ./Dockerfile
+    ports:
+      - "3005:3005" 
+ 

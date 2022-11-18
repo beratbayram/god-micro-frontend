@@ -1,5 +1,5 @@
 import "./index.css";
-import("./../../wc");
+import "../wc.js";
 
 declare global {
   interface Window {
