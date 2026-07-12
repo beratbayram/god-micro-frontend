@@ -1,4 +1,3 @@
-version: '1.0'
 services:
   god-host:
     build:
@@ -12,6 +11,7 @@ services:
       - vanilla-app
       - vue-app
       - vue-host
+      - angular-app
   react-host:
     build:
       context: react-host
@@ -41,5 +41,10 @@ services:
       context: vue-host
       dockerfile: ./Dockerfile
     ports:
-      - "3005:3005" 
- 
+      - "3005:3005"
+  angular-app:
+    build:
+      context: angular-app/elements
+      dockerfile: ./angularApp/Dockerfile
+    ports:
+      - "3004:3004"

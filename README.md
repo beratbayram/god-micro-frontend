@@ -107,14 +107,7 @@ multiple enterprise products at TÜBİTAK BİLGEM YTE.*
 docker-compose up
 ```
 
-Two caveats, found the hard way:
-
-- The lockfiles pin an internal registry that no longer resolves. Until they're
-  regenerated, point them at the public registry before installing:
-  `find . \( -name yarn.lock -o -name package-lock.json \) -not -path "*/node_modules/*" -exec sed -i '' 's|http://10.222.60.100:8081/repository/npm-group|https://registry.npmjs.org|g' {} \;`
-- `docker-compose.yml` doesn't include the Angular remote. Start it manually or
-  the angular-app cells stay in their loading state:
-  `cd angular-app/elements/angularApp && npm install && npm start`
+Starts all seven apps; open http://localhost:4000 for the full constellation.
 
 Without Docker: Node 16, `npm install && npx webpack serve --mode development`
 in each package (ports in the table above), plus `npx tsc` in

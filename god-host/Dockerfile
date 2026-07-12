@@ -16,6 +16,8 @@ RUN yes | npm install -D webpack-cli
 
 RUN npm install --save-dev @types/html-webpack-plugin
 
+RUN cd lit-button && yarn && npx tsc
+
 RUN yarn build
 
 RUN npm i -g http-server

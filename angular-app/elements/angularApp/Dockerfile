@@ -4,15 +4,15 @@ RUN mkdir app
 
 WORKDIR /app
 
-COPY ./angular-app/elements/angularApp/package.json .
+COPY ./angularApp/package.json ./angularApp/
+
+RUN cd angularApp && npm install
 
 COPY ./ .
 
-RUN npm i  
-
-RUN npm start
+RUN cd angularApp && npm run build
 
 RUN npm i -g http-server
 
 EXPOSE 3004
-CMD ["http-server", "dist","-p", "3004"]
+CMD ["http-server", "angularApp/dist", "-p", "3004"]
