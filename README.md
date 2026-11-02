@@ -5,7 +5,7 @@ host × remote combination under Webpack Module Federation, tested to find out
 which ones actually work.
 
 React, Vue, Angular, and vanilla JS apps each act as remotes; React, Vue, and a
-framework-agnostic "god host" consume them — with a shared [Lit](https://lit.dev)
+framework-agnostic "god host" consume them, with a shared [Lit](https://lit.dev)
 Web Component (`lit-button`) as the framework-neutral common denominator.
 
 ## The matrix
@@ -18,7 +18,7 @@ Web Component (`lit-button`) as the framework-neutral common denominator.
 
 ✅ works with an idiomatic import · ⚠️ works, but with glue code or a caveat
 
-¹ god-host never imports the app remotes directly — they arrive **transitively**
+¹ god-host never imports the app remotes directly: they arrive **transitively**
 through the embedded react-host and vue-host (nested federation, two hops:
 god-host → react-host → react-app). Rendering and live prop propagation
 verified all the way down: typing in god-host's input updates every leaf across
@@ -27,21 +27,21 @@ all four frameworks.
 ² god-host puts `<angular-component>` in its own HTML and declares `angularApp`
 as a remote, but never actually imports `angularApp/Component`. The element
 upgrades only because an embedded host registers it in the page-global custom
-elements registry. It works — by transitive side effect.
+elements registry. It works, by transitive side effect.
 
 ³ Needs a hand-written wrapper: grab a DOM ref, then call the remote's exposed
 imperative renderer (`createApp().mount()`, `ReactDOM.render()`, or
-`innerHTML`). Works, but the remote fully remounts on every prop change —
+`innerHTML`). Works, but the remote fully remounts on every prop change;
 there's no reconciliation across the framework boundary.
 
 ⁴ Consumed as an Angular Elements Web Component: a side-effect import registers
 `<angular-component>`, props flow as attributes. After Lit, this is the
-cleanest cross-framework path — no wrapper component needed on the React side
+cleanest cross-framework path: no wrapper component needed on the React side
 beyond a JSX tag.
 
 ⁵ `<lit-button>` tags are present in every app, but nothing except god-host
 (via `wc.js`) registers the element. Standalone, react-host and vue-host render
-five blank tags with **zero console errors** — undefined custom elements fail
+five blank tags with **zero console errors**: undefined custom elements fail
 silently. Composed under god-host, all of them upgrade and work.
 
 ⁶ vue-host consumes react-app **two ways at once**: an imperative
@@ -50,7 +50,7 @@ silently. Composed under god-host, all of them upgrade and work.
 
 Tested empirically (July 2026): all seven apps served with webpack dev servers
 on Node 16, exact dependency versions from the 2022 lockfiles, driven in a real
-browser — rendering, prop propagation, and custom-element registry state
+browser: rendering, prop propagation, and custom-element registry state
 checked per cell. React 17 is a shared singleton between react-host and
 react-app; Vue 3.2 is shared between vue-host and vue-app. No version-conflict
 warnings from Module Federation's shared-scope negotiation in any combination.
@@ -66,7 +66,7 @@ warnings from Module Federation's shared-scope negotiation in any combination.
 
 Each app is independently built and served; remotes are resolved at runtime via
 Module Federation. react-host and vue-host are hosts *and* remotes: they expose
-their own renderers, which god-host consumes — so the app remotes are federated
+their own renderers, which god-host consumes, so the app remotes are federated
 through two levels of hosts.
 
 The Angular remote is its own experiment: the Angular 14 app is compiled to a
@@ -74,9 +74,9 @@ single Angular Elements bundle (`elements/index.js`), and a thin webpack
 wrapper federates that bundle as `angularApp/Component`. Angular's build
 tooling never has to know Module Federation exists.
 
-Each remote exposes components in whatever shape its framework allows —
-a React component, a Vue component, an imperative `render(element, props)`
-function, a custom element — which is exactly what makes the matrix
+Each remote exposes components in whatever shape its framework allows
+(a React component, a Vue component, an imperative `render(element, props)`
+function, a custom element), which is exactly what makes the matrix
 interesting: the host has to bridge whatever it gets.
 
 ## What this answers
@@ -91,14 +91,14 @@ multiple enterprise products at TÜBİTAK BİLGEM YTE.*
 ## Notable failures
 
 - **Undefined custom elements fail silently.** A host that forgets to register
-  `lit-button` renders blank inline elements — no error, no warning, nothing.
+  `lit-button` renders blank inline elements: no error, no warning, nothing.
   The worst kind of integration failure: invisible.
 - **god-host's Angular cell works by accident.** Remove the Angular import from
   the embedded hosts and god-host's own `<angular-component>` quietly stops
   upgrading. Page-global registries create invisible coupling between federated
   apps.
 - **Imperative bridges throw away reconciliation.** Every React↔Vue crossing
-  remounts the entire remote subtree per prop change — fine for a demo, a real
+  remounts the entire remote subtree per prop change. Fine for a demo, a real
   cost at scale.
 
 ## Running
