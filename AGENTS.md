@@ -5,8 +5,8 @@ This file provides guidance to coding agents when working with code in this repo
 An experiment repo: seven independently built apps wired together with Webpack 5 Module
 Federation to test every host × remote combination across React 17, Vue 3.2, Angular 14, vanilla
 TypeScript and a Lit Web Component. The README holds the tested compatibility matrix and its
-footnotes; it is the main deliverable. The repo is archived on GitHub (read-only) and the
-dependencies are from 2022.
+footnotes; it is the main deliverable. It is the featured project on the GitHub profile, so keep
+the repo unarchived. The dependencies are from 2022.
 
 ## Running
 
